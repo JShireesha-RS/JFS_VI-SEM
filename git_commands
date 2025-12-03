@@ -1,0 +1,22 @@
+1.git init
+2.git add .
+3.git commit -m "message" //eg. example java program
+4.git remote add origin<remote-url>
+
+Example:
+git remote push master
+https://github.com/Jshireesha/Jfs_VISEM.git
+5.git push origin master
+6. you can check in remote repository
+
+---
+
+if you can add any files in local repository originyou can chnage the existing files in local repository
+1. git status
+2.git add .
+3.git commit -m " massage"
+4.git push origin master
+---
+
+if you want  to retrive the remote repository to local pc
+git clone <remote-url>
