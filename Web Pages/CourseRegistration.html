@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Course Registration Form</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body {
+            font-family: "Times New Roman";
+            background: green;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 450px;
+            margin: auto;
+            background: pink;
+            padding: 25px;
+            border-radius: 6px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: black;
+        }
+
+        .subject-list label {
+            display: block;
+            margin: 8px 0;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: black;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #444;
+        }
+
+        .total-box {
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="container">
+    <h2>Course Registration Form</h2>
+
+    <form id="regForm">
+
+        <label>Student Name:</label>
+        <input type="text" id="name" placeholder="Enter your name">
+
+        <br><br>
+
+        <label>Select Subjects:</label>
+
+        <div class="subject-list">
+
+            <label><input type="checkbox" class="subject" value="1200"> Data Structures ($1200)</label>
+            <label><input type="checkbox" class="subject" value="1300"> DBMS ($1300)</label>
+            <label><input type="checkbox" class="subject" value="1400"> Computer Networks ($1400)</label>
+            <label><input type="checkbox" class="subject" value="900"> JFS ($900)</label>
+            <label><input type="checkbox" class="subject" value="2200"> CP ($2200)</label>
+            <label><input type="checkbox" class="subject" value="1200"> Java Programming ($1200)</label>
+
+        </div>
+
+        <div class="total-box">
+            Total Registration Fee: <span id="total">$0</span>
+        </div>
+
+        <br>
+
+        <button type="submit">Submit Registration</button>
+
+    </form>
+</div>
+
+
+<script>
+    let subjects = document.querySelectorAll(".subject");
+    let totalBox = document.getElementById("total");
+
+    // update fee when user checks boxes
+    subjects.forEach(item => {
+        item.addEventListener("change", () => {
+            let total = 0;
+
+            subjects.forEach(sub => {
+                if (sub.checked) {
+                    total += parseInt(sub.value);
+                }
+            });
+
+            totalBox.innerText = "$" + total;
+        });
+    });
+
+    // on submit
+    document.getElementById("regForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        let selectedSubjects = [];
+        let totalFee = 0;
+
+        subjects.forEach(sub => {
+            if (sub.checked) {
+                let subjectName = sub.parentElement.innerText.trim();
+                selectedSubjects.push(subjectName);
+                totalFee += parseInt(sub.value);
+            }
+        });
+
+        if (selectedSubjects.length === 0) {
+            alert("Please select at least one subject.");
+            return;
+        }
+
+        let studentName = document.getElementById("name").value;
+
+        let message =
+            "Student Name: " + studentName + "\n\n" +
+            "Selected Subjects:\n- " + selectedSubjects.join("\n- ") + "\n\n" +
+            "Total Fee: $" + totalFee;
+
+        alert(message);
+    });
+</script>
+
+</body>
+</html>
